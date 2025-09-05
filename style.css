@@ -95,3 +95,27 @@ body.dark #hero .btn:hover {
   #nav-toggle{display:block;}
   nav.scrolled #nav-links{background:#fff;}
 }
+
+
+
+
+
+/* Contact form message animation with fade & slide */
+#form-message {
+  opacity: 0;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+#form-message.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#form-message.hide {
+  opacity: 0;
+  transform: translateY(-10px);
+}

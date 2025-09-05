@@ -59,3 +59,54 @@ document.querySelectorAll('#nav-links a').forEach(link => {
     navLinks.classList.remove('active'); 
   });
 });
+
+
+
+// Contact form submission with fade & slide message
+const contactForm = document.getElementById('contact-form');
+const formMessage = document.getElementById('form-message');
+
+function showFormMessage(message, color) {
+  formMessage.style.display = 'block';
+  formMessage.style.color = color;
+  formMessage.textContent = message;
+
+  // Add show class for fade in
+  formMessage.classList.remove('hide');
+  formMessage.classList.add('show');
+
+  // Fade out & slide up after 4 seconds
+  setTimeout(() => {
+    formMessage.classList.remove('show');
+    formMessage.classList.add('hide');
+
+    // Hide completely after transition
+    setTimeout(() => {
+      formMessage.style.display = 'none';
+    }, 500); // matches CSS transition
+  }, 4000);
+}
+
+contactForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const formData = new FormData(contactForm);
+
+  fetch(contactForm.action, {
+    method: 'POST',
+    body: formData,
+    headers: { 'Accept': 'application/json' }
+  }).then(response => {
+    if(response.ok){
+      showFormMessage("✅ Message sent successfully!", '#00aaff');
+      contactForm.reset();
+    } else {
+      response.json().then(data => {
+        const errorMsg = data.errors ? data.errors.map(e => e.message).join(', ') : "❌ Message failed to send.";
+        showFormMessage(errorMsg, 'red');
+      });
+    }
+  }).catch(() => {
+    showFormMessage("❌ Message failed to send.", 'red');
+  });
+});
