@@ -5,9 +5,10 @@ window.addEventListener('scroll', () => {
   else navbar.classList.remove('scrolled');
 });
 
-// Section & Project Cards fade-in
+// Section & Project Cards fade-in on scroll
 const sections = document.querySelectorAll('section');
 const projectCards = document.querySelectorAll('.project-card');
+
 function handleScroll() {
   const trigger = window.innerHeight * 0.85;
   sections.forEach(section => {
@@ -18,18 +19,20 @@ function handleScroll() {
   });
 }
 window.addEventListener('scroll', handleScroll);
-handleScroll(); 
+handleScroll();
 
-// Skills animation
+// Skills progress bar animation
 const skills = document.querySelectorAll('.progress');
 const skillSection = document.getElementById('skills');
 function animateSkills() {
-  if(skillSection.getBoundingClientRect().top < window.innerHeight * 0.85){
-    skills.forEach(skill => { skill.style.width = skill.style.width; });
+  if (skillSection.getBoundingClientRect().top < window.innerHeight * 0.85) {
+    skills.forEach(skill => {
+      skill.style.width = skill.getAttribute('data-width');
+    });
   }
 }
 window.addEventListener('scroll', animateSkills);
-animateSkills(); 
+animateSkills();
 
 // Dark/light theme toggle
 const toggle = document.getElementById('theme-toggle');
@@ -43,7 +46,9 @@ toggle.addEventListener('click', () => {
 // Mobile nav toggle
 const navToggle = document.getElementById('nav-toggle');
 const navLinks = document.getElementById('nav-links');
-navToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+navToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
 
 // Smooth scroll for navbar links
 document.querySelectorAll('#nav-links a').forEach(link => {
