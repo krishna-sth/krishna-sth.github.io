@@ -1,38 +1,66 @@
-// Smooth scroll
-const navLinks = document.querySelectorAll('nav ul li a');
-navLinks.forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior:'smooth' });
-  });
+// Navbar scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) navbar.classList.add('scrolled');
+  else navbar.classList.remove('scrolled');
 });
 
-// Fade-in sections & animate skills
-const sections = document.querySelectorAll('section, header');
+// Section & Project Cards fade-in on scroll
+const sections = document.querySelectorAll('section');
+const projectCards = document.querySelectorAll('.project-card');
+
+function handleScroll() {
+  const trigger = window.innerHeight * 0.85;
+  sections.forEach(section => {
+    if (section.getBoundingClientRect().top < trigger) {
+      section.classList.add('visible');
+    }
+  });
+  projectCards.forEach(card => {
+    if (card.getBoundingClientRect().top < trigger) {
+      card.classList.add('visible');
+    }
+  });
+}
+window.addEventListener('scroll', handleScroll);
+handleScroll(); 
+
+// Skills progress bar animation
 const skills = document.querySelectorAll('.progress');
 const skillSection = document.getElementById('skills');
 
-function handleScroll(){
-  const triggerBottom = window.innerHeight * 0.85;
-
-  sections.forEach(section => {
-    if(section.getBoundingClientRect().top < triggerBottom) section.classList.add('visible');
-  });
-
-  if(skillSection.getBoundingClientRect().top < triggerBottom){
-    skills.forEach(skill => skill.style.width = skill.getAttribute('style'));
+function animateSkills() {
+  if (skillSection.getBoundingClientRect().top < window.innerHeight * 0.85) {
+    skills.forEach(skill => {
+      skill.style.width = skill.style.width;
+    });
   }
-
-  const navbar = document.getElementById('navbar');
-  if(window.scrollY > 50) navbar.classList.add('scrolled');
-  else navbar.classList.remove('scrolled');
 }
+window.addEventListener('scroll', animateSkills);
+animateSkills(); 
 
-window.addEventListener('scroll', handleScroll);
-
-// Dark/Light mode toggle
+// Dark/light theme toggle
 const toggle = document.getElementById('theme-toggle');
-toggle.addEventListener('click', ()=>{
+toggle.addEventListener('click', () => {
   document.body.classList.toggle('dark');
-  toggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+  const icon = toggle.querySelector('i');
+  icon.classList.toggle('fa-moon');
+  icon.classList.toggle('fa-sun');
+});
+
+// Mobile nav toggle
+const navToggle = document.getElementById('nav-toggle');
+const navLinks = document.getElementById('nav-links');
+navToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
+
+// Smooth scroll for navbar links
+document.querySelectorAll('#nav-links a').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    target.scrollIntoView({ behavior: 'smooth' });
+    navLinks.classList.remove('active'); 
+  });
 });
