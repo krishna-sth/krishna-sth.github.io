@@ -101,7 +101,7 @@ contactForm.addEventListener('submit', function(e) {
     headers: { 'Accept': 'application/json' }
   }).then(response => {
     if(response.ok){
-      showFormMessage("✅ Message sent successfully!", '#00aaff');
+      showFormMessage("Message sent successfully!", '#00aaff');
       contactForm.reset();
     } else {
       response.json().then(data => {
