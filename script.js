@@ -5,35 +5,27 @@ window.addEventListener('scroll', () => {
   else navbar.classList.remove('scrolled');
 });
 
-// Section & Project Cards fade-in on scroll
+// Section & Project Cards fade-in
 const sections = document.querySelectorAll('section');
 const projectCards = document.querySelectorAll('.project-card');
-
 function handleScroll() {
   const trigger = window.innerHeight * 0.85;
   sections.forEach(section => {
-    if (section.getBoundingClientRect().top < trigger) {
-      section.classList.add('visible');
-    }
+    if (section.getBoundingClientRect().top < trigger) section.classList.add('visible');
   });
   projectCards.forEach(card => {
-    if (card.getBoundingClientRect().top < trigger) {
-      card.classList.add('visible');
-    }
+    if (card.getBoundingClientRect().top < trigger) card.classList.add('visible');
   });
 }
 window.addEventListener('scroll', handleScroll);
 handleScroll(); 
 
-// Skills progress bar animation
+// Skills animation
 const skills = document.querySelectorAll('.progress');
 const skillSection = document.getElementById('skills');
-
 function animateSkills() {
-  if (skillSection.getBoundingClientRect().top < window.innerHeight * 0.85) {
-    skills.forEach(skill => {
-      skill.style.width = skill.style.width;
-    });
+  if(skillSection.getBoundingClientRect().top < window.innerHeight * 0.85){
+    skills.forEach(skill => { skill.style.width = skill.style.width; });
   }
 }
 window.addEventListener('scroll', animateSkills);
@@ -51,9 +43,7 @@ toggle.addEventListener('click', () => {
 // Mobile nav toggle
 const navToggle = document.getElementById('nav-toggle');
 const navLinks = document.getElementById('nav-links');
-navToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('active');
-});
+navToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
 
 // Smooth scroll for navbar links
 document.querySelectorAll('#nav-links a').forEach(link => {
