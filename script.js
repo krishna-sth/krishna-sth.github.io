@@ -62,6 +62,9 @@ document.querySelectorAll('#nav-links a').forEach(link => {
 
 
 
+
+
+
 // Contact form submission with fade & slide message
 const contactForm = document.getElementById('contact-form');
 const formMessage = document.getElementById('form-message');
