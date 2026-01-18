@@ -35,13 +35,13 @@ window.addEventListener('scroll', animateSkills);
 animateSkills();
 
 // Dark/light theme toggle
-const toggle = document.getElementById('theme-toggle');
-toggle.addEventListener('click', () => {
-  document.body.classList.toggle('dark');
-  const icon = toggle.querySelector('i');
-  icon.classList.toggle('fa-moon');
-  icon.classList.toggle('fa-sun');
-});
+// const toggle = document.getElementById('theme-toggle');
+// toggle.addEventListener('click', () => {
+//   document.body.classList.toggle('dark');
+//   const icon = toggle.querySelector('i');
+//   icon.classList.toggle('fa-moon');
+//   icon.classList.toggle('fa-sun');
+// });
 
 // Mobile nav toggle
 const navToggle = document.getElementById('nav-toggle');
